@@ -1,6 +1,6 @@
 FROM python:3.10-alpine
 
-LABEL org.opencontainers.image.source=https://github.com/mjsully/fuel-prices-api 
+LABEL org.opencontainers.image.source=https://github.com/mjsully/ontologies-api:python
 
 WORKDIR /usr/src/app
 
