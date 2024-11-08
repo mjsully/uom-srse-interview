@@ -5,7 +5,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ontologies-api:go
+  IMAGE_NAME: mjsully/ontologies-api:go
 
 jobs:
   build:

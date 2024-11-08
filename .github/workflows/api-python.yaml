@@ -1,11 +1,11 @@
-name: Build and publish API (go)
+name: Build and publish API (python)
 
 on:
   [push, workflow_dispatch]
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ontologies-api:python
+  IMAGE_NAME: mjsully/ontologies-api:python
 
 jobs:
   build:
