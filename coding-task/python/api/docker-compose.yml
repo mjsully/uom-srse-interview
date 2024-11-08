@@ -1,0 +1,12 @@
+services:
+  ontologies-api-python:
+    image: ghcr.io/mjsully/ontologies-api:python
+    build: .
+    container_name: ontologies-api-python
+    ports:
+      - 8000:8000
+    volumes:
+      - ./data/:/usr/src/app/data
+    environment:
+      - logLevel=INFO
+    command: "uvicorn server:app --host 0.0.0.0"

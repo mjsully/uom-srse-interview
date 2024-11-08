@@ -1,0 +1,8 @@
+services:
+  ontologies-api-go:
+    image: ghcr.io/mjsully/ontologies-api:go
+    build: .
+    container_name: ontologies-api-go
+    ports:
+      - 8080:8080
+    command: ./api
