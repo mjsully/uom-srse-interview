@@ -1,6 +1,6 @@
-FROM python:3.10-alpine
+FROM python:3.13-alpine
 
-LABEL org.opencontainers.image.source=https://github.com/mjsully/ontologies-api:python
+LABEL org.opencontainers.image.source=https://github.com/mjsully/uom-srse-interview/
 
 WORKDIR /usr/src/app
 

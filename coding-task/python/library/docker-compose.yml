@@ -1,7 +1,0 @@
-services:
-  ontologies-library-python:
-    image: ghcr.io/mjsully/ontologies-library:python
-    build: .
-    container_name: ontologies-library-python
-    environment:
-      - logLevel=INFO

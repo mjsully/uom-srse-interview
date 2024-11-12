@@ -13,18 +13,18 @@ ghcr.io/mjsully/ontologies-api:python
 ghcr.io/mjsully/ontologies-api:go
 ghcr.io/mjsully/ontologies-library:python
 ```
-Docker compose files for each piece of code are included in the relevant subdirectories. 
+Docker compose files for the Python and Go APIs are included in the relevant subdirectories. 
 ## Running and querying the API
 To run and query either the Python or Go APIs, do the following:
 ```
-cd coding-task/python/api
+cd coding-task/python/api (or cd coding-task/go/api)
 docker compose up
 ```
 If all is well, the docker image will be pulled from the registry and run according to the compose file. To query, try the following:
 ```
 curl localhost:8000/ontologies/<onto>
 ```
-If you are running the Go API, replace port 8000 with port 8080. Replace `<onto>` with an ontology ID, e.g. 'addicto'. Both APIs will return JSON formatted data. The Python library also has a simple UI, which can be found by running the container and then going to [http://localhost:8000/docs](http://localhost:8000/docs).
+If you are running the Go API, replace port 8000 with port 8080. Replace `<onto>` with an ontology ID, e.g. 'addicto'. Both APIs will return JSON formatted data. The Python API also has a simple UI, which can be found by running the container and then going to [http://localhost:8000/docs](http://localhost:8000/docs).
 ## Using the library
 A container has been provided to allow one to test the library. You can do this as follows:
 ```
