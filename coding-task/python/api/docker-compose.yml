@@ -6,7 +6,7 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./data/:/usr/src/app/data
+      - ./:/usr/src/app/
     environment:
       - logLevel=INFO
     command: "uvicorn server:app --host 0.0.0.0"
