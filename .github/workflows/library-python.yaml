@@ -1,7 +1,10 @@
 name: Build and publish python library
 
 on:
-  [push, workflow_dispatch]
+  push:
+    paths:
+      coding-task/python/library/**
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io

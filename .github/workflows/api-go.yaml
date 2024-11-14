@@ -1,7 +1,10 @@
 name: Build and publish API (go)
 
 on:
-  [push, workflow_dispatch]
+  push:
+    paths:
+      coding-task/go/api/**
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io

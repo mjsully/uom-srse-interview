@@ -1,14 +1,17 @@
-import os
 import logging
+import os
 from contextlib import asynccontextmanager
+
+import httpx
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-import models
-import constants
+from fastapi.responses import JSONResponse
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-import httpx
+
+import models
+import constants
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -21,17 +24,18 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 logging.basicConfig(
-    level = os.environ.get("logLevel", "INFO").upper()
+    level=os.environ.get("logLevel", "INFO").upper()
 )
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins = ["*"],
-    allow_credentials = True,
-    allow_methods = ["*"],
-    allow_headers = ["*"],
-    expose_headers = ["*"]
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+    expose_headers=["*"]
 )
+
 
 def initialise():
 
@@ -44,6 +48,7 @@ def initialise():
         engine = create_engine(f"sqlite:///{constants.DB_FILEPATH}")
         models.Base.metadata.create_all(engine)
 
+
 def get_session():
 
     """Return a session instance."""
@@ -51,13 +56,14 @@ def get_session():
     engine = create_engine(f"sqlite:///{constants.DB_FILEPATH}")
     Session = sessionmaker(bind=engine)
     session = Session()
-    return session 
+    return session
+
 
 @app.get('/ontologies/{onto}')
 async def ontologies(onto: str):
 
     """
-    Lookup ontology information using the [OLS API](https://www.ebi.ac.uk/ols4/about) and return JSON response. 
+    Lookup ontology information using the [OLS API](https://www.ebi.ac.uk/ols4/about) and return JSON response.
     This API has a single endpoint `ontologies/<id>`, where the `<id> parameter is taken from the ID column in [ontologies](https://www.ebi.ac.uk/ols4/ontologies).
     """
 
@@ -77,18 +83,18 @@ async def ontologies(onto: str):
                 "Status": json_data["status"]
             }
             return JSONResponse(
-                status_code=r.status_code, 
+                status_code=r.status_code,
                 content=results_dict
             )
-        
+
         except KeyError as e:
 
             logging.error("--- KeyError ---")
             logging.error(repr(e))
 
             return JSONResponse(
-                status_code = 500,
-                content = constants.KEY_ERROR
+                status_code=500,
+                content=constants.KEY_ERROR
             )
 
         except httpx.HTTPStatusError as e:
@@ -97,16 +103,16 @@ async def ontologies(onto: str):
             logging.error(repr(e))
 
             return JSONResponse(
-                    status_code = e.response.status_code, 
-                    content = constants.HTTP_STATUS_ERROR
+                    status_code=e.response.status_code,
+                    content=constants.HTTP_STATUS_ERROR
                 )
-        
+
         except httpx.RequestError as e:
 
             logging.error("--- RequestError ---")
             logging.error(repr(e))
 
             return JSONResponse(
-                    status_code = 500, 
-                    content = constants.REQUEST_ERROR
+                    status_code=500,
+                    content=constants.REQUEST_ERROR
                 )

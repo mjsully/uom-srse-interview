@@ -1,7 +1,10 @@
 name: Build and publish API (python)
 
 on:
-  [push, workflow_dispatch]
+  push:
+    paths:
+      coding-task/python/api/**
+  workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io

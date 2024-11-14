@@ -1,0 +1,15 @@
+{
+	"name": "ontologies-library-python",
+	"image": "python:3.13-alpine",
+	"extensions": [
+	  "ms-python.python",
+	  "ms-python.vscode-pylance",
+	  "ms-python.pylint",
+	  "github.vscode-github-actions",
+	  "ms-python.flake8"
+	],
+	"forwardPorts": [8000],
+	"workspaceMount": "source=${localWorkspaceFolder}/coding-task/python/library,target=/workspace,type=bind",
+	"workspaceFolder": "/workspace",
+	"postCreateCommand": "pip install -r requirements-dev.txt"
+  }

@@ -3,4 +3,3 @@ httpx
 uvicorn[standard]
 sqlalchemy
 tqdm
-pylint

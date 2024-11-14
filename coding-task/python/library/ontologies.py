@@ -1,13 +1,16 @@
-import os
+import argparse
 import logging
-import constants
-import httpx
-import argparse 
+import os
 import pprint
 
+import httpx
+
+import constants
+
 logging.basicConfig(
-    level = os.environ.get("logLevel", "INFO").upper()
+    level=os.environ.get("logLevel", "INFO").upper()
 )
+
 
 def main():
 
@@ -16,10 +19,11 @@ def main():
     args = argparser.parse_args()
     pprint.pp(get_ontology_info(args.onto))
 
+
 def get_ontology_info(onto: str):
 
     """
-    Lookup ontology information using the [OLS API](https://www.ebi.ac.uk/ols4/about) and return JSON response. 
+    Lookup ontology information using the [OLS API](https://www.ebi.ac.uk/ols4/about) and return JSON response.
     This API has a single endpoint `ontologies/<id>`, where the `<id> parameter is taken from the ID column in [ontologies](https://www.ebi.ac.uk/ols4/ontologies).
     """
 
@@ -37,7 +41,7 @@ def get_ontology_info(onto: str):
             "Status": json_data["status"]
         }
         return results_dict
-    
+
     except KeyError as e:
 
         logging.error("--- KeyError ---")
@@ -51,13 +55,14 @@ def get_ontology_info(onto: str):
         logging.error(repr(e))
 
         return constants.HTTP_STATUS_ERROR
-    
+
     except httpx.RequestError as e:
 
         logging.error("--- RequestError ---")
         logging.error(repr(e))
 
         return constants.REQUEST_ERROR
+
 
 if __name__ == "__main__":
     main()

@@ -1,7 +1,4 @@
-import datetime
-
-from sqlalchemy import Integer, Numeric, String, ForeignKey, UniqueConstraint
-from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
+from sqlalchemy.orm import DeclarativeBase
 
 
 class Base(DeclarativeBase):

@@ -1,0 +1,10 @@
+{
+	"name": "ontologies-api-go",
+	"image": "golang:1.23.2",
+	"extensions": [
+		"golang.go"
+	],
+	"forwardPorts": [8080],
+	"workspaceMount": "source=${localWorkspaceFolder}/coding-task/go/api,target=/workspace,type=bind",
+	"workspaceFolder": "/workspace"
+  }
